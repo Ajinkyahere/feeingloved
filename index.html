@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Romantic Couple App</title>
+  <title>Made with ❤️ for Rakhi</title>
   <style>
     /* Global Styles */
     * {
@@ -14,44 +14,45 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: radial-gradient(circle, #ff9a9e, #fecfef);
-      height: 100vh;
+      background: linear-gradient(to bottom, #ffe7e7, #ffc8dd);
+      min-height: 100vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
 
     h1 {
-      margin: 20px 0;
-      color: white;
+      color: #ff0066;
       font-size: 2.5rem;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     .scene {
       position: relative;
       width: 100%;
-      height: 50%;
+      max-width: 800px;
+      height: 500px;
+      margin-top: 20px;
       display: flex;
-      justify-content: center;
+      justify-content: space-around;
       align-items: flex-end;
     }
 
-    /* Characters */
+    /* Character Styles */
     .character {
-      position: relative;
       width: 150px;
       height: 300px;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      animation: float 3s ease-in-out infinite;
     }
 
-    /* Male Character */
-    .male .head,
-    .female .head {
+    /* Heads */
+    .head {
       width: 100px;
       height: 100px;
       background: #ffe0bd;
@@ -59,84 +60,80 @@
       position: relative;
     }
 
-    .male .head::before,
-    .female .head::before,
-    .male .head::after,
-    .female .head::after {
+    .head::before,
+    .head::after {
       content: '';
-      position: absolute;
       width: 12px;
       height: 12px;
       background: #000;
+      position: absolute;
       border-radius: 50%;
       top: 35px;
     }
 
-    .male .head::before,
-    .female .head::before {
-      left: 25px;
+    .head::before {
+      left: 30px;
     }
 
-    .male .head::after,
-    .female .head::after {
-      right: 25px;
+    .head::after {
+      right: 30px;
     }
 
-    .male .body,
-    .female .body {
+    /* Bodies */
+    .body {
       width: 100px;
-      height: 150px;
+      height: 200px;
       border-radius: 10px;
+      background: #ff8b94;
+      margin-top: -10px;
     }
 
     .male .body {
-      background: #0066cc;
+      background: #6fa3ef;
     }
 
-    .female .body {
-      background: #ff69b4;
+    /* Pets */
+    .pet {
+      position: relative;
+      width: 80px;
+      height: 100px;
+      background: #ffe0bd;
+      border-radius: 50%;
     }
 
-    /* Action Buttons */
+    .pet::after {
+      content: '';
+      width: 100px;
+      height: 50px;
+      position: absolute;
+      background: #d9a679;
+      border-radius: 50%;
+      bottom: -10px;
+      left: -10px;
+    }
+
     .actions {
       margin-top: 20px;
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
     }
 
     .btn {
       padding: 10px 20px;
       font-size: 1rem;
-      background: #ff6f61;
+      background: #ff477e;
       color: white;
       border: none;
-      border-radius: 10px;
+      border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
     }
 
     .btn:hover {
-      background: #ff3b2f;
+      background: #ff1c61;
       transform: scale(1.1);
-    }
-
-    /* Animation Keyframes */
-    @keyframes float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-    }
-
-    footer {
-      margin-top: 20px;
-      font-size: 1rem;
-      color: white;
-      text-shadow: 1px 1px 3px black;
     }
 
     .popup {
@@ -145,12 +142,12 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px;
+      width: 300px;
+      background: white;
       border-radius: 10px;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
       text-align: center;
-      z-index: 1000;
+      padding: 20px;
     }
 
     .popup.active {
@@ -160,35 +157,46 @@
     .popup button {
       margin-top: 10px;
       padding: 10px 20px;
-      background: #ff6f61;
+      background: #ff477e;
       border: none;
       color: white;
-      font-size: 1rem;
       border-radius: 10px;
       cursor: pointer;
+    }
+
+    footer {
+      margin-top: 20px;
+      color: #ff0066;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Romantic App</h1>
+  <h1>Made with ❤️ for Rakhi</h1>
 
   <div class="scene">
-    <div class="character male" id="male">
+    <!-- Male Character -->
+    <div class="character male">
       <div class="head"></div>
       <div class="body"></div>
     </div>
-    <div class="character female" id="female">
+    <!-- Female Character -->
+    <div class="character female">
       <div class="head"></div>
       <div class="body"></div>
     </div>
+    <!-- Chikki (Pug) -->
+    <div class="pet" id="chikki"></div>
+    <!-- Lalu (Cat) -->
+    <div class="pet" id="lalu"></div>
   </div>
 
   <div class="actions">
     <button class="btn" onclick="performAction('kiss')">Kiss 💋</button>
     <button class="btn" onclick="performAction('hug')">Hug 🤗</button>
-    <button class="btn" onclick="performAction('giftFlower')">Gift Flowers 🌹</button>
-    <button class="btn" onclick="performAction('giftTeddy')">Gift Teddy 🧸</button>
-    <button class="btn" onclick="performAction('giftChocolates')">Gift Chocolates 🍫</button>
+    <button class="btn" onclick="performAction('gift')">Gift 🎁</button>
+    <button class="btn" onclick="performAction('pet')">Pet 🐾</button>
+    <button class="btn" onclick="performAction('love')">Say "I Love You" ❤️</button>
   </div>
 
   <div class="popup" id="popup">
@@ -196,7 +204,7 @@
     <button onclick="closePopup()">Close</button>
   </div>
 
-  <footer>Made with ❤️ by Ajinkya Jadhav</footer>
+  <footer>Created by Ajinkya Jadhav with ❤️</footer>
 
   <script>
     function performAction(action) {
@@ -204,23 +212,22 @@
       const message = document.getElementById("popup-message");
 
       if (action === "kiss") {
-        message.textContent = "You kissed your partner! 💋";
+        message.textContent = "You kissed Rakhi! 💋";
       } else if (action === "hug") {
-        message.textContent = "You hugged your partner tightly! 🤗";
-      } else if (action === "giftFlower") {
-        message.textContent = "You gifted a beautiful rose! 🌹";
-      } else if (action === "giftTeddy") {
-        message.textContent = "You gifted a cute teddy bear! 🧸";
-      } else if (action === "giftChocolates") {
-        message.textContent = "You gifted delicious chocolates! 🍫";
+        message.textContent = "You hugged Rakhi tightly! 🤗";
+      } else if (action === "gift") {
+        message.textContent = "You gifted Rakhi a beautiful present! 🎁";
+      } else if (action === "pet") {
+        message.textContent = "Chikki and Lalu feel loved! 🐶🐱";
+      } else if (action === "love") {
+        message.textContent = "You said 'I Love You, Rakhi' ❤️";
       }
 
       popup.classList.add("active");
     }
 
     function closePopup() {
-      const popup = document.getElementById("popup");
-      popup.classList.remove("active");
+      document.getElementById("popup").classList.remove("active");
     }
   </script>
 </body>
