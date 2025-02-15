@@ -14,118 +14,70 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(to bottom, #ffe7e7, #ffc8dd);
-      min-height: 100vh;
+      background: linear-gradient(to bottom, #ffecd2, #fcb69f);
+      height: 100vh;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     h1 {
       color: #ff0066;
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      font-size: 1.8rem;
+      text-align: center;
+      margin: 10px 0;
     }
 
     .scene {
       position: relative;
       width: 100%;
-      max-width: 800px;
-      height: 500px;
-      margin-top: 20px;
+      height: 65%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      overflow: hidden;
+    }
+
+    /* Characters */
+    .character {
+      width: 100px;
+      height: auto;
+      position: relative;
+      animation: roam 5s infinite alternate;
+    }
+
+    .character svg {
+      width: 100%;
+      height: auto;
+    }
+
+    /* Roaming Animation */
+    @keyframes roam {
+      from {
+        transform: translateX(-20px);
+      }
+      to {
+        transform: translateX(20px);
+      }
+    }
+
+    /* Action Buttons */
+    .actions {
+      width: 100%;
       display: flex;
       justify-content: space-around;
-      align-items: flex-end;
-    }
-
-    /* Character Styles */
-    .character {
-      width: 150px;
-      height: 300px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Heads */
-    .head {
-      width: 100px;
-      height: 100px;
-      background: #ffe0bd;
-      border-radius: 50%;
-      position: relative;
-    }
-
-    .head::before,
-    .head::after {
-      content: '';
-      width: 12px;
-      height: 12px;
-      background: #000;
-      position: absolute;
-      border-radius: 50%;
-      top: 35px;
-    }
-
-    .head::before {
-      left: 30px;
-    }
-
-    .head::after {
-      right: 30px;
-    }
-
-    /* Bodies */
-    .body {
-      width: 100px;
-      height: 200px;
-      border-radius: 10px;
-      background: #ff8b94;
-      margin-top: -10px;
-    }
-
-    .male .body {
-      background: #6fa3ef;
-    }
-
-    /* Pets */
-    .pet {
-      position: relative;
-      width: 80px;
-      height: 100px;
-      background: #ffe0bd;
-      border-radius: 50%;
-    }
-
-    .pet::after {
-      content: '';
-      width: 100px;
-      height: 50px;
-      position: absolute;
-      background: #d9a679;
-      border-radius: 50%;
-      bottom: -10px;
-      left: -10px;
-    }
-
-    .actions {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      padding: 10px;
     }
 
     .btn {
       padding: 10px 20px;
-      font-size: 1rem;
+      font-size: 0.9rem;
       background: #ff477e;
       color: white;
       border: none;
-      border-radius: 20px;
+      border-radius: 15px;
       cursor: pointer;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
       transition: all 0.3s;
@@ -136,18 +88,20 @@
       transform: scale(1.1);
     }
 
+    /* Popup for Actions */
     .popup {
       display: none;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 300px;
+      width: 80%;
       background: white;
       border-radius: 10px;
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
       text-align: center;
       padding: 20px;
+      z-index: 10;
     }
 
     .popup.active {
@@ -165,9 +119,10 @@
     }
 
     footer {
-      margin-top: 20px;
       color: #ff0066;
-      font-size: 1rem;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+      text-align: center;
     }
   </style>
 </head>
@@ -176,27 +131,48 @@
 
   <div class="scene">
     <!-- Male Character -->
-    <div class="character male">
-      <div class="head"></div>
-      <div class="body"></div>
+    <div class="character" id="male">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <circle cx="32" cy="18" r="14" fill="#ffc8dd"></circle>
+        <rect x="20" y="32" width="24" height="28" fill="#ff8b94" rx="5"></rect>
+      </svg>
     </div>
+
     <!-- Female Character -->
-    <div class="character female">
-      <div class="head"></div>
-      <div class="body"></div>
+    <div class="character" id="female">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <circle cx="32" cy="18" r="14" fill="#ffe0bd"></circle>
+        <rect x="20" y="32" width="24" height="28" fill="#ffb6c1" rx="5"></rect>
+      </svg>
     </div>
-    <!-- Chikki (Pug) -->
-    <div class="pet" id="chikki"></div>
-    <!-- Lalu (Cat) -->
-    <div class="pet" id="lalu"></div>
+
+    <!-- Chikki the Dog -->
+    <div class="character" id="chikki">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <ellipse cx="32" cy="45" rx="20" ry="10" fill="#d9a679"></ellipse>
+        <circle cx="32" cy="32" r="10" fill="#d9a679"></circle>
+        <circle cx="28" cy="30" r="2" fill="#000"></circle>
+        <circle cx="36" cy="30" r="2" fill="#000"></circle>
+      </svg>
+    </div>
+
+    <!-- Lalu the Cat -->
+    <div class="character" id="lalu">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+        <ellipse cx="32" cy="45" rx="20" ry="10" fill="#c9b2d5"></ellipse>
+        <circle cx="32" cy="32" r="10" fill="#c9b2d5"></circle>
+        <circle cx="28" cy="30" r="2" fill="#000"></circle>
+        <circle cx="36" cy="30" r="2" fill="#000"></circle>
+        <path d="M22 20 L32 14 L42 20" fill="none" stroke="#c9b2d5" stroke-width="4"></path>
+      </svg>
+    </div>
   </div>
 
   <div class="actions">
     <button class="btn" onclick="performAction('kiss')">Kiss 💋</button>
     <button class="btn" onclick="performAction('hug')">Hug 🤗</button>
-    <button class="btn" onclick="performAction('gift')">Gift 🎁</button>
     <button class="btn" onclick="performAction('pet')">Pet 🐾</button>
-    <button class="btn" onclick="performAction('love')">Say "I Love You" ❤️</button>
+    <button class="btn" onclick="performAction('gift')">Gift 🎁</button>
   </div>
 
   <div class="popup" id="popup">
@@ -212,15 +188,13 @@
       const message = document.getElementById("popup-message");
 
       if (action === "kiss") {
-        message.textContent = "You kissed Rakhi! 💋";
+        message.textContent = "Ajinkya kissed Rakhi 💋!";
       } else if (action === "hug") {
-        message.textContent = "You hugged Rakhi tightly! 🤗";
-      } else if (action === "gift") {
-        message.textContent = "You gifted Rakhi a beautiful present! 🎁";
+        message.textContent = "Ajinkya hugged Rakhi tightly 🤗!";
       } else if (action === "pet") {
-        message.textContent = "Chikki and Lalu feel loved! 🐶🐱";
-      } else if (action === "love") {
-        message.textContent = "You said 'I Love You, Rakhi' ❤️";
+        message.textContent = "Chikki and Lalu are happy and playing 🐶🐱!";
+      } else if (action === "gift") {
+        message.textContent = "Ajinkya gave Rakhi a beautiful gift 🎁!";
       }
 
       popup.classList.add("active");
@@ -231,4 +205,4 @@
     }
   </script>
 </body>
-</html>
+  </html>
